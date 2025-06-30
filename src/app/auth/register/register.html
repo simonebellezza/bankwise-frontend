@@ -1,0 +1,76 @@
+<app-header />
+<div class="register">
+  <mat-card>
+    <mat-card-header class="header">
+      <mat-card-title>Registrati</mat-card-title>
+      <mat-card-subtitle>Inserisci i tuoi dati</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="content">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="child">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="firstName" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Cognome</mat-label>
+            <input matInput formControlName="lastName" />
+          </mat-form-field>
+        </div>
+
+        <div class="child">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput spellcheck="false" formControlName="username" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" />
+          </mat-form-field>
+        </div>
+
+        <div class="child">
+          <mat-form-field appearance="outline">
+            <mat-label>Telefono</mat-label>
+            <input matInput type="tel" formControlName="phoneNumber" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Indirizzo</mat-label>
+            <input matInput formControlName="address" />
+          </mat-form-field>
+        </div>
+
+        <div class="child">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Data di nascita</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="error">{{errorMessage()}}</div>
+
+        <div class="actions">
+          <button
+            mat-flat-button
+            type="submit"
+            [disabled]="registerForm.invalid"
+          >
+            <span>Registrati</span>
+            <mat-icon>login</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,55 @@
+mat-sidenav-container {
+  height: 100vh;
+}
+
+mat-sidenav {
+  border-radius: unset;
+  width: 250px;
+  background-color: var(--background);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent);
+}
+
+.logo {
+  font-size: 30px;
+  color: white;
+  font-weight: 800;
+}
+
+.profile {
+  border-radius: 50%;
+  background-color: var(--accent-dark);
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.profile:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu mat-icon {
+  color: white;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.menu mat-icon:hover {
+  color: var(--primary-dark);
+}
