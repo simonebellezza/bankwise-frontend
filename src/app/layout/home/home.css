@@ -7,7 +7,6 @@ mat-sidenav {
   width: 250px;
   background-color: var(--background);
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .header {
@@ -26,9 +25,10 @@ mat-sidenav {
 }
 
 .profile {
+  font-size: 15px;
   border-radius: 50%;
   background-color: var(--accent-dark);
-  padding: 10px;
+  padding: 3px 6px;
   color: white;
   cursor: pointer;
 }
@@ -52,4 +52,82 @@ mat-sidenav {
 
 .menu mat-icon:hover {
   color: var(--primary-dark);
+}
+
+.sidenav-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidenav-header mat-icon {
+  font-size: 20px;
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.sidenav-header mat-icon:hover {
+  color: var(--primary);
+}
+
+.name {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--primary-dark);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions-child {
+  width: 99%;
+  border: none;
+  border-radius: unset;
+  justify-content: flex-start;
+}
+
+.select-account {
+  flex: 1;
+}
+.select-account > mat-form-field {
+  width: 100%;
+}
+
+.logout {
+  display: flex;
+  flex-direction: column;
+}
+
+.logout-button {
+  border-radius: unset;
+}
+
+.sidenav-wrapper button {
+  background-color: var(--background);
+}
+
+.dashboard-icon {
+  color: var(--primary-dark);
+}
+
+.transactions-icon {
+  color: orange;
+}
+
+.profile-icon {
+  color: green;
+}
+
+mat-form-field {
+  margin-top: 10px;
 }

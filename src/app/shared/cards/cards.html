@@ -1,0 +1,23 @@
+<mat-tab-group>
+  @for (card of cards(); track card.id) {
+  <mat-tab [label]="card.cardType">
+    <div
+      class="card"
+      [class.gold]="card.circuit === 'AMERICAN_EXPRESS'"
+      [class.visa]="card.circuit === 'VISA'"
+      [class.mastercard]="card.circuit === 'MASTERCARD'"
+    >
+      <div class="header">
+        <span>{{card.cardType}}</span>
+        <mat-icon>wifi</mat-icon>
+      </div>
+      <div class="content"></div>
+      <div class="iban">{{card.iban}}</div>
+      <div class="footer">
+        <div>{{card.expirationDate | date:'mediumDate'}}</div>
+        <div class="circuit">{{card.circuit}}</div>
+      </div>
+    </div>
+  </mat-tab>
+  }
+</mat-tab-group>

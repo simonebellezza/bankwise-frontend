@@ -1,5 +1,48 @@
 <mat-sidenav-container>
-  <mat-sidenav #drawer mode="side" opened>
+  <mat-sidenav #drawer mode="push">
+    <div class="sidenav-wrapper">
+      <div class="sidenav-header">
+        <span class="name"
+          >{{this.user().firstName}} {{this.user().lastName}}</span
+        >
+        <mat-icon (click)="drawer.toggle()">close</mat-icon>
+      </div>
+      <div class="actions">
+        <button
+          matButton="outlined"
+          class="actions-child"
+          [routerLink]="['/dashboard']"
+        >
+          <mat-icon class="dashboard-icon">home</mat-icon> Dashboard
+        </button>
+        <button
+          matButton="outlined"
+          class="actions-child"
+          [routerLink]="['/transactions']"
+        >
+          <mat-icon class="transactions-icon">receipt_long</mat-icon>
+          Transazioni
+        </button>
+        <button
+          matButton="outlined"
+          class="actions-child"
+          [routerLink]="['/profile']"
+        >
+          <mat-icon class="profile-icon">person</mat-icon> Profilo
+        </button>
+      </div>
+
+      <div class="select-account">
+       
+      </div>
+
+      <div class="logout">
+        <button matFab extended class="logout-button" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar class="header">
@@ -7,7 +50,7 @@
         <mat-icon (click)="drawer.toggle()">menu</mat-icon>
         <span class="logo">Bankwise</span>
       </div>
-      <div class="profile">{{initials()}}</div>
+      <div class="profile" (click)="redirectToProfile()">{{initials()}}</div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

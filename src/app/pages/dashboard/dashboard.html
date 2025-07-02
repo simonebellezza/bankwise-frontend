@@ -1,1 +1,38 @@
-<p>Dashboard</p>
+@if (accounts() && accounts().length > 0) {
+<div class="item account-section">
+    <p class="account-number">Conto: {{ account().accountNumber }}</p>
+    <div class="balance-wrapper">
+        <p class="balance" [class.blurred]="!showBalance()">
+          {{ account().balance | currency:account().currency }}
+        </p>
+      <mat-icon class="eye" (click)="toggleBalance()"
+      >{{showBalance() ? 'visibility' : 'visibility_off'}}</mat-icon
+    >
+    </div>
+</div>
+}
+
+<div class="dashboard">
+  
+  <mat-card>
+    <app-select-account class="item" />
+  </mat-card>
+  
+  <mat-card>
+    <app-cards  class="item"/>
+  </mat-card>
+
+  <mat-card>
+    <app-transactions-chart class="item" />
+  </mat-card>
+
+  <mat-card>
+    <div></div>
+  </mat-card>
+
+  <mat-card class="transactions">
+    <app-transactions-list class="item"/>
+  </mat-card>
+  
+  
+</div>

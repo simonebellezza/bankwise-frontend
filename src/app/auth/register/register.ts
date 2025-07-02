@@ -74,13 +74,14 @@ export class Register {
       next: (resp) => {
         console.log(resp);
         this.registerForm.reset();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
       },
       error: (error) => {
-        this.errorMessage.set(error.error.message);
+        this.errorMessage.set(error.error)
+        
         setTimeout(() => {
           this.errorMessage.set('');
-        }, 2000);
+        }, 3000);
       }
     })
   }

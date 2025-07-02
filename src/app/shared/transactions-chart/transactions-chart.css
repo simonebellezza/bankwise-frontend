@@ -1,0 +1,13 @@
+.chart-container {
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+p {
+  color: var(--gray-700);
+  font-size: 25px;
+}

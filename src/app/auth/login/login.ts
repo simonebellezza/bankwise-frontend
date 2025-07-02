@@ -54,7 +54,6 @@ export class Login {
 
     this.authService.login(credential).subscribe({
       next: (resp) => {
-        console.log(resp);
         this.errorMessage.set('');
         this.loginForm.reset();
         this.router.navigate(['/']);

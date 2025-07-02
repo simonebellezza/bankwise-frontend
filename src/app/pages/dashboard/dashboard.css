@@ -4,3 +4,55 @@
   background-color: var(--background);
   padding: 20px;
 }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 25px;
+}
+
+.item {
+  padding: 20px;
+  min-height: 120px;
+  height: 100%;
+}
+
+.account-section {
+  max-width: 300px;
+}
+
+.balance {
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.balance-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eye {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.balance.blurred {
+  filter: blur(10px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 430px) {
+  .dashboard {
+    /* Colonne più strette per schermi piccoli */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (min-width: 850px) {
+  .transactions {
+    /* Spanning di due colonne su schermi medio-grandi */
+    grid-column: span 2;
+  }
+}

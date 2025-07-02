@@ -1,0 +1,90 @@
+.card {
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  max-width: 370px;
+  aspect-ratio: 1.58 / 1;
+  margin: 0 auto;
+  padding: 20px 24px 32px 24px;
+  color: white;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gold {
+  background-image: url("/bg-img-gold.avif");
+}
+.mastercard {
+  background-image: url("/bg-img-mastercard.avif");
+}
+.visa {
+  background-image: url("/bg-img-visa.avif");
+}
+
+/* Header della card */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.341);
+  padding-bottom: 8px;
+}
+
+.header span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header mat-icon {
+  font-size: 22px;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.iban {
+  margin-top: 8px;
+  font-size: 13px;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.3px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.341);
+  background: rgba(0,0,0,0.10);
+}
+
+/* Footer della card */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.circuit {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 500px) {
+  .card {
+    padding: 10px;
+  }
+
+  .circuit {
+    font-size: 7px;
+  }
+
+  .iban {
+    font-size: 10px;
+  }
+}

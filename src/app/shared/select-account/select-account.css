@@ -1,0 +1,35 @@
+.select-account-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 10px;
+}
+
+p {
+  color: var(--gray-700);
+  font-size: 25px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.child {
+  flex: 1;
+  background: linear-gradient(90deg, var(--primary-dark) 70%, var(--accent-dark) 100%);
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.child:hover {
+  background: linear-gradient(90deg, var(--accent-dark) 60%, var(--primary-dark) 100%);
+  transform: translateY(-2px) scale(1.01);
+}
