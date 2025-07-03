@@ -1,5 +1,5 @@
 <div class="select-account-section">
-    <p>Seleziona conto</p>
+    <h2>Seleziona conto</h2>
   @for (account of accounts(); track account.id) {
     <div class="child" (click)="onSelectAccount(account.id)">
       <span>Conto:</span><span>{{account.id}}</span>

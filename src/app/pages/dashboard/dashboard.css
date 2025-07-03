@@ -34,6 +34,7 @@
 }
 
 .eye {
+  color: var(--gray-700);
   font-size: 24px;
   cursor: pointer;
 }
@@ -54,5 +55,6 @@
   .transactions {
     /* Spanning di due colonne su schermi medio-grandi */
     grid-column: span 2;
+    grid-row: span 3;
   }
 }

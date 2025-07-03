@@ -1,1 +1,30 @@
-<p>transactions-list works!</p>
+<mat-list role="list">
+  @if (transactions() && transactions().length > 0) {
+    <h2>Lista Movimenti</h2>
+    @for (t of transactions(); track t.id) {
+      <mat-list-item role="list-item">
+        
+        @switch (t.transactionType) {
+          @case ("DEPOSIT") {<mat-icon matListItemIcon class="atm">atm</mat-icon>}
+          @case ("WITHDRAWAL") {<mat-icon matListItemIcon class="atm">atm</mat-icon>}
+          @case ("PAYMENT") {<mat-icon matListItemIcon class="payment">contactless</mat-icon>}
+          @case ("TRANSFER") {<mat-icon matListItemIcon class="transfer">credit_card</mat-icon>}
+        }
+        
+        <span class="title" matListItemTitle>{{t.transactionType}}</span>
+        <p matListItemLine>
+          <span class="description">{{t.description}}</span>
+        </p>
+        
+        <div matListItemMeta><span class="amount"
+          [class.red]="t.amount < 0"
+          [class.green]="t.amount > 0"
+          >{{t.amount | currency:t.currency}}</span></div>
+        
+          <p matListItemLine class="date">{{ t.date | date: 'mediumDate' }}</p>
+      </mat-list-item>
+    } 
+  } @else {
+  <h2 class="empty">Non ci sono movimenti</h2>
+    }
+</mat-list>

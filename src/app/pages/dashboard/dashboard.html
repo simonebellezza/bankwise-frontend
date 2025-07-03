@@ -2,9 +2,10 @@
 <div class="item account-section">
     <p class="account-number">Conto: {{ account().accountNumber }}</p>
     <div class="balance-wrapper">
-        <p class="balance" [class.blurred]="!showBalance()">
+        <h2
+         class="balance" [class.blurred]="!showBalance()">
           {{ account().balance | currency:account().currency }}
-        </p>
+        </h2>
       <mat-icon class="eye" (click)="toggleBalance()"
       >{{showBalance() ? 'visibility' : 'visibility_off'}}</mat-icon
     >
@@ -27,7 +28,7 @@
   </mat-card>
 
   <mat-card>
-    <div></div>
+    <div>PAGAMENTI RAPIDI</div>
   </mat-card>
 
   <mat-card class="transactions">

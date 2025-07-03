@@ -1,4 +1,6 @@
 <div class="chart-container">
-  <p>Tieni traccia dei tuoi movimenti</p>
   <canvas id="MyChart">{{chart}}</canvas>
+  @if (transactions.length === 0) {
+    <p class="empty">Non ci sono movimenti</p>
+  }
 </div>
