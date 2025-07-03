@@ -11,6 +11,6 @@ export class CardsService {
   private url = 'http://localhost:8080/card/'
 
   getCards(id: number) {
-    return this.httpClient.get<CardResponse[]>(this.url + 'cards/' + id);
+    return this.httpClient.get<CardResponse[]>(this.url + id);
   }
 }

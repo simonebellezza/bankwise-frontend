@@ -8,10 +8,11 @@ import {
 } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { AccountResponse } from '../../models/account.model';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-select-account',
-  imports: [],
+  imports: [MatIcon],
   templateUrl: './select-account.html',
   styleUrl: './select-account.css',
 })

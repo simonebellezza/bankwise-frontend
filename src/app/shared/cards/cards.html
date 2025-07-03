@@ -1,23 +1,24 @@
-<mat-tab-group>
+
+<div
+  class="card"
+  [class.gold]="cardSelected().circuit === 'AMERICAN_EXPRESS'"
+  [class.visa]="cardSelected().circuit === 'VISA'"
+  [class.mastercard]="cardSelected().circuit === 'MASTERCARD'"
+>
+  <div class="header">
+    <span>{{cardSelected().cardType}}</span>
+    <mat-icon>wifi</mat-icon>
+  </div>
+  <div class="content"></div>
+  <div class="iban">{{cardSelected().iban}}</div>
+  <div class="footer">
+    <div>{{cardSelected().expirationDate | date:'mediumDate'}}</div>
+    <div class="circuit">{{cardSelected().circuit}}</div>
+  </div>
+</div>
+
+<div class="switch">
   @for (card of cards(); track card.id) {
-  <mat-tab [label]="card.cardType">
-    <div
-      class="card"
-      [class.gold]="card.circuit === 'AMERICAN_EXPRESS'"
-      [class.visa]="card.circuit === 'VISA'"
-      [class.mastercard]="card.circuit === 'MASTERCARD'"
-    >
-      <div class="header">
-        <span>{{card.cardType}}</span>
-        <mat-icon>wifi</mat-icon>
-      </div>
-      <div class="content"></div>
-      <div class="iban">{{card.iban}}</div>
-      <div class="footer">
-        <div>{{card.expirationDate | date:'mediumDate'}}</div>
-        <div class="circuit">{{card.circuit}}</div>
-      </div>
-    </div>
-  </mat-tab>
+    <button matButton (click)="selectCard(card)">{{card.cardType}}</button>
   }
-</mat-tab-group>
+</div>

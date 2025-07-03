@@ -2,13 +2,37 @@
   display: block;
   min-height: calc(100vh - 60px);
   background-color: var(--background);
-  padding: 20px;
 }
 
 .dashboard {
+  width: 80%;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto auto;
   gap: 25px;
+
+  grid-template-areas: 
+    "cards gestione"
+    "chart gestione"
+    "transactions transactions";
+}
+
+/* Assegnazione aree specifiche */
+.dashboard mat-card:nth-child(1) {
+  grid-area: cards;
+}
+
+.dashboard mat-card:nth-child(2) {
+  grid-area: gestione;
+}
+
+.dashboard mat-card:nth-child(3) {
+  grid-area: chart;
+}
+
+.transactions {
+  grid-area: transactions;
 }
 
 .item {
@@ -17,14 +41,16 @@
   height: 100%;
 }
 
-.account-section {
-  max-width: 300px;
+.account-number {
+  color: rgb(83, 35, 35);
 }
 
 .balance {
   font-size: 38px;
   font-weight: 600;
-  margin-bottom: 10px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 .balance-wrapper {
@@ -34,7 +60,14 @@
 }
 
 .eye {
-  color: var(--gray-700);
+  border-radius: 50%;
+  background-color: var(--accent-dark);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
   font-size: 24px;
   cursor: pointer;
 }
@@ -43,18 +76,27 @@
   filter: blur(10px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 430px) {
-  .dashboard {
-    /* Colonne più strette per schermi piccoli */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
+.header-wrapper {
+  background: var(--accent);
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  margin-bottom: 80px;
 }
 
-@media (min-width: 850px) {
-  .transactions {
-    /* Spanning di due colonne su schermi medio-grandi */
-    grid-column: span 2;
-    grid-row: span 3;
-  }
+mat-card-header {
+  height: 70px;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, var(--accent), var(--primary));
+  color: white;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+mat-card-title {
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+  margin: 0;
 }

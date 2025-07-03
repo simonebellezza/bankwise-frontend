@@ -1,6 +1,5 @@
 <mat-list role="list">
   @if (transactions() && transactions().length > 0) {
-    <h2>Lista Movimenti</h2>
     @for (t of transactions(); track t.id) {
       <mat-list-item role="list-item">
         

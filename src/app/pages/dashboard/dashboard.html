@@ -1,39 +1,45 @@
 @if (accounts() && accounts().length > 0) {
-<div class="item account-section">
+<div class="header-wrapper">
+  <div class="item account-section">
     <p class="account-number">Conto: {{ account().accountNumber }}</p>
     <div class="balance-wrapper">
-        <h2
-         class="balance" [class.blurred]="!showBalance()">
-          {{ account().balance | currency:account().currency }}
-        </h2>
+      <h2 class="balance" [class.blurred]="!showBalance()">
+        {{ account().balance | currency:account().currency }}
+      </h2>
       <mat-icon class="eye" (click)="toggleBalance()"
-      >{{showBalance() ? 'visibility' : 'visibility_off'}}</mat-icon
-    >
+        >{{showBalance() ? 'visibility' : 'visibility_off'}}</mat-icon
+      >
     </div>
+  </div>
 </div>
 }
 
 <div class="dashboard">
-  
   <mat-card>
-    <app-select-account class="item" />
-  </mat-card>
-  
-  <mat-card>
-    <app-cards  class="item"/>
+    <mat-card-header class="mat-card-header">
+      <mat-card-title>💳 Le Tue Carte</mat-card-title>
+    </mat-card-header>
+    <app-cards class="item" />
   </mat-card>
 
   <mat-card>
+    <mat-card-header class="mat-card-header">
+      <mat-card-title>🏦 Gestione Conti</mat-card-title>
+    </mat-card-header>
+    <app-select-account class="item" />
+  </mat-card>
+
+  <mat-card class="gestione-conti">
+    <mat-card-header class="mat-card-header">
+      <mat-card-title>📊 Andamento Finanziario</mat-card-title>
+    </mat-card-header>
     <app-transactions-chart class="item" />
   </mat-card>
 
-  <mat-card>
-    <div>PAGAMENTI RAPIDI</div>
-  </mat-card>
-
   <mat-card class="transactions">
-    <app-transactions-list class="item"/>
+    <mat-card-header class="mat-card-header">
+      <mat-card-title>💰 Movimenti Recenti</mat-card-title>
+    </mat-card-header>
+    <app-transactions-list class="item" />
   </mat-card>
-  
-  
 </div>
