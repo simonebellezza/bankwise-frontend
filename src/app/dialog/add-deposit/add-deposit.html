@@ -1,0 +1,41 @@
+<form [formGroup]="myForm" (ngSubmit)="createDeposit()">
+  <div class="wrapper-title" (click)="closeDialog()">
+    <h2>Effettua un deposito</h2>
+    <mat-icon>close</mat-icon>
+  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Importo</mat-label>
+    <input
+      matInput
+      type="number"
+      formControlName="amount"
+      placeholder="500.00"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descrizione</mat-label>
+    <textarea 
+      matInput 
+      formControlName="description"
+      placeholder="Inserisci una descrizione del deposito..."
+      rows="3">
+    </textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Conto di riferimento</mat-label>
+    <mat-select formControlName="accountId">
+      @for (account of accounts(); track account.id) {
+      <mat-option value="{{account.id}}">{{account.id}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    matButton="filled"
+    [disabled]="myForm.invalid"
+  >Deposita
+</button>
+  <div class="response">{{response()}}</div>
+</form>

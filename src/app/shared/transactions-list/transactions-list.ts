@@ -25,7 +25,9 @@ export class TransactionsList {
       const current = this.account();
       if (current && current.id) {
         this.transactionService.getTransactions(current.id).subscribe({
-          next: (transactions) => this.transactions.set(transactions),
+          next: (transactions) => {
+            this.transactions.set(transactions);
+          },
           error: (error) => console.log(error),
         });
       }

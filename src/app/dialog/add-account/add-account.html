@@ -1,0 +1,34 @@
+<form [formGroup]="myForm" (ngSubmit)="createAccount()">
+  <div class="wrapper-title" (click)="closeDialog()">
+    <h2>Nuovo Conto Corrente</h2>
+    <mat-icon>close</mat-icon>
+  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Importo iniziale</mat-label>
+    <input
+      matInput
+      type="number"
+      formControlName="balance"
+      placeholder="1000.00"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Valuta</mat-label>
+    <mat-select formControlName="currency">
+      <mat-option value="EUR">EUR - Euro</mat-option>
+      <mat-option value="USD">USD - Dollaro</mat-option>
+      <mat-option value="GBP">GBP - Sterlina</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    matButton="filled"
+    [disabled]="myForm.invalid"
+    (click)="createAccount()"
+    type="submit"
+  >
+    Crea Account
+  </button>
+  <div class="response">{{response()}}</div>
+</form>

@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -7,9 +7,8 @@ import { UserService } from '../../services/user.service';
 import { UserResponse } from '../../models/user.model';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { AccountResponse } from '../../models/account.model';
+import { SidenavActions } from "../../shared/sidenav-actions/sidenav-actions";
+import { SidenavQuickActions } from "../../shared/sidenav-quick-actions/sidenav-quick-actions";
 
 @Component({
   selector: 'app-home',
@@ -20,9 +19,9 @@ import { AccountResponse } from '../../models/account.model';
     MatIcon,
     MatButtonModule,
     RouterModule,
-    MatFormFieldModule,
-    MatSelectModule,
-  ],
+    SidenavActions,
+    SidenavQuickActions
+],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

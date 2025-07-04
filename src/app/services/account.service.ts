@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, signal, computed, inject } from "@angular/core";
-import { AccountResponse } from "../models/account.model";
+import { AccountRequestDTO, AccountResponse } from "../models/account.model";
 import { tap } from "rxjs";
 
 @Injectable({
@@ -12,6 +12,10 @@ export class AccountService {
 
   private account = signal<AccountResponse>({} as AccountResponse);
   accountSelected = this.account.asReadonly();
+
+  createAccount (account: AccountRequestDTO) {
+    return this.httpClient.post<AccountResponse>(this.url + "create", account); 
+  }
 
   getAccounts() {
     return this.httpClient.get<AccountResponse[]>(this.url + 'accounts');

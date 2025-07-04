@@ -1,14 +1,9 @@
-import {
-  Component,
-  EventEmitter,
-  inject,
-  OnInit,
-  Output,
-  signal,
-} from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { AccountResponse } from '../../models/account.model';
 import { MatIcon } from '@angular/material/icon';
+import { AddAccount } from '../../dialog/add-account/add-account';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-select-account',
@@ -18,6 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class SelectAccount implements OnInit {
   accountService = inject(AccountService);
+  dialog = inject(MatDialog);
   accounts = signal<AccountResponse[]>([]);
 
   ngOnInit(): void {
@@ -33,5 +29,18 @@ export class SelectAccount implements OnInit {
 
   onSelectAccount(accountId: number) {
     this.accountService.getAccountById(accountId);
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddAccount);
+
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          console.log('Account creato:', result);
+          this.getAccounts();
+        }
+      },
+    });
   }
 }

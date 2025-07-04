@@ -1,0 +1,28 @@
+<div class="sidenav-header">
+  <span class="name">{{this.user().firstName}} {{this.user().lastName}}</span>
+  <mat-icon (click)="drawer.toggle()">close</mat-icon>
+</div>
+<div class="actions">
+  <button
+    matButton="outlined"
+    class="actions-child"
+    [routerLink]="['/dashboard']"
+  >
+    <mat-icon class="dashboard-icon">home</mat-icon> Dashboard
+  </button>
+  <button
+    matButton="outlined"
+    class="actions-child"
+    [routerLink]="['/transactions']"
+  >
+    <mat-icon class="transactions-icon">receipt_long</mat-icon>
+    Transazioni
+  </button>
+  <button
+    matButton="outlined"
+    class="actions-child"
+    [routerLink]="['/profile']"
+  >
+    <mat-icon class="profile-icon">person</mat-icon> Profilo
+  </button>
+</div>

@@ -1,0 +1,47 @@
+.sidenav-header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidenav-header mat-icon {
+  font-size: 20px;
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.sidenav-header mat-icon:hover {
+  color: var(--primary);
+}
+
+.name {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--primary-dark);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions-child {
+  width: 99%;
+  border: none;
+  border-radius: unset;
+  justify-content: flex-start;
+}
+
+.dashboard-icon {
+  color: var(--primary-dark);
+}
+
+.transactions-icon {
+  color: orange;
+}
+
+.profile-icon {
+  color: green;
+}

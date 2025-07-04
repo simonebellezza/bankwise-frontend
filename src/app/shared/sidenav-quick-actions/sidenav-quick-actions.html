@@ -1,0 +1,47 @@
+<div class="header">
+  <p>Azioni rapide</p>
+</div>
+
+<div class="quick-actions">
+    <button
+      matButton="outlined"
+      class="actions-child"
+      (click)="openCardDialog()"
+    >
+      <mat-icon class="card-icon">add_card</mat-icon> 
+      <span>Nuova card</span>
+    </button>
+    <button
+      matButton="outlined"
+      class="actions-child"
+      (click)="openPaymentDialog()"
+    >
+      <mat-icon class="payment-icon">payment</mat-icon> 
+      <span>Paga online</span>
+    </button>
+    <button
+      matButton="outlined"
+      class="actions-child"
+      (click)="openWithdrawDialog()"
+    >
+      <mat-icon class="withdraw-icon">local_atm</mat-icon> 
+      Prelievo
+    </button>
+    <button
+      matButton="outlined"
+      class="actions-child"
+      (click)="openTransferDialog()"
+    >
+      <mat-icon class="transfer-icon">send</mat-icon> 
+      Bonifico
+    </button>
+    <button
+      matButton="outlined"
+      class="actions-child"
+      (click)="openDepositDialog()"
+    >
+      <mat-icon class="deposit-icon">savings</mat-icon> 
+      Deposito
+    </button>
+  
+</div>

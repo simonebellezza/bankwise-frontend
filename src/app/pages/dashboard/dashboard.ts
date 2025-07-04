@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Cards } from '../../shared/cards/cards';
 import { MatIcon } from '@angular/material/icon';
 import { SelectAccount } from '../../shared/select-account/select-account';
-import { TransactionsList } from "../../shared/transactions-list/transactions-list";
+import { TransactionsList } from '../../shared/transactions-list/transactions-list';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,8 +18,8 @@ import { TransactionsList } from "../../shared/transactions-list/transactions-li
     MatCardModule,
     MatIcon,
     SelectAccount,
-    TransactionsList
-],
+    TransactionsList,
+  ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -45,5 +45,4 @@ export class Dashboard implements OnInit {
   toggleBalance() {
     this.showBalance.set(!this.showBalance());
   }
-
 }

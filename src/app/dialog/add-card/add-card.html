@@ -1,0 +1,42 @@
+<form [formGroup]="myForm" (ngSubmit)="createCard()">
+  <div class="wrapper-title" (click)="closeDialog()">
+    <h2>Nuova Carta Bancaria</h2>
+    <mat-icon>close</mat-icon>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tipo di carta bancaria</mat-label>
+    <mat-select formControlName="cardType">
+      <mat-option value="DEBIT">DEBIT</mat-option>
+      <mat-option value="CREDIT">CREDIT</mat-option>
+      <mat-option value="PREPAID">PREPAID</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Circuito</mat-label>
+    <mat-select formControlName="circuit">
+      <mat-option value="VISA">VISA</mat-option>
+      <mat-option value="MASTERCARD">MASTERCARD</mat-option>
+      <mat-option value="AMERICAN_EXPRESS">AMERICAN_EXPRESS</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Conto di riferimento</mat-label>
+    <mat-select formControlName="accountId">
+      @for (account of accounts(); track account.id) {
+      <mat-option value="{{account.id}}">{{account.id}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    matButton="filled"
+    [disabled]="myForm.invalid"
+    type="submit"
+  >
+    Crea Carta
+  </button>
+  <div class="response">{{response()}}</div>
+</form>

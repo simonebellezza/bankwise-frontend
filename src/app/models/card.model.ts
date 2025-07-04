@@ -9,6 +9,12 @@ export interface CardResponse {
     pin: string
 }
 
+export interface CardRequestDTO {
+    cardType: cardType,
+    circuit: Circuit,
+    accountId: number
+}
+
 export enum cardType {
     DEBIT = 'DEBIT',
     CREDIT = 'CREDIT',

@@ -1,0 +1,44 @@
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.header p {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-dark);
+}
+
+.payment-icon {
+  color: #2196F3;
+}
+
+.card-icon {
+  color: #E91E63;
+}
+
+.withdraw-icon {
+  color: #FF9800;
+}
+
+.transfer-icon {
+  color: #9C27B0;
+}
+
+.deposit-icon {
+  color: #4CAF50;
+}
+
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions-child {
+  width: 99%;
+  border: none;
+  border-radius: unset;
+  justify-content: flex-start;
+}

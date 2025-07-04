@@ -8,7 +8,6 @@ export interface AccountResponse {
 
 export interface AccountRequestDTO {
   balance: number;
-  bankName: string;
   currency: Currency;
 }
 
@@ -16,6 +15,4 @@ export enum Currency {
   EUR = 'EUR',
   USD = 'USD',
   GBP = 'GBP',
-  INR = 'INR',
-  JPY = 'JPY'
 }
