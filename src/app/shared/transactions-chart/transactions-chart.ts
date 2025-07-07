@@ -3,6 +3,7 @@ import { Chart, registerables } from 'chart.js';
 import { TransactionService } from '../../services/transaction.service';
 import { TransactionResponseDTO } from '../../models/transaction.model';
 import { AccountService } from '../../services/account.service';
+import { DashboardStateService } from '../../services/dashboardState.service';
 
 Chart.register(...registerables);
 @Component({
@@ -12,26 +13,28 @@ Chart.register(...registerables);
   styleUrl: './transactions-chart.css',
 })
 export class TransactionsChart {
-  private transactionService = inject(TransactionService);
-  private accountService = inject(AccountService);
-  transactions: TransactionResponseDTO[] = [];
-  account = this.accountService.accountSelected;
+  dashboardService = inject(DashboardStateService);
+
+  transactions = this.dashboardService.transactions$;
+  account = this.dashboardService.accountSelected;
 
   payment = 0;
   deposit = 0;
   withdrawal = 0;
+  transfer = 0;
 
   public config: any = {
     type: 'doughnut',
     data: {
-      labels: ['Pagamenti', 'Depositi', 'Prelievi'],
+      labels: ['Pagamenti', 'Depositi', 'Prelievi', 'Bonifici'],
       datasets: [
         {
-          data: [this.payment, 50, 100],
+          data: [this.payment, this.deposit, this.withdrawal, this.transfer],
           backgroundColor: [
             'rgb(255, 0, 55)',
             'rgb(0, 153, 255)',
             'rgb(255, 205, 86)',
+            'rgb(0, 194, 32)',
           ],
           hoverOffset: 4,
         },
@@ -43,45 +46,46 @@ export class TransactionsChart {
 
   constructor() {
     effect(() => {
-      const current = this.account();
-  
-      if (!(current && current.id)) {
+      const currentTransactions = this.transactions();
+
+      if (!currentTransactions || currentTransactions.length === 0) {
         return;
       }
-      this.transactionService.getTransactions(current.id).subscribe({
-        next: (transactions) => {
-          this.transactions = transactions;
 
-          // Calcola i pagamenti
-          this.payment = this.transactions
-            .filter((t) => t.transactionType === 'PAYMENT')
-            .reduce((sum, t) => sum + t.amount, 0);
+      // Calcola i pagamenti
+      this.payment = currentTransactions
+        .filter((t) => t.transactionType === 'PAYMENT')
+        .reduce((sum, t) => sum + t.amount, 0);
 
-          // Calcola i depositi
-          this.deposit = this.transactions
-            .filter((t) => t.transactionType === 'DEPOSIT')
-            .reduce((sum, t) => sum + t.amount, 0);
+      // Calcola i depositi
+      this.deposit = currentTransactions
+        .filter((t) => t.transactionType === 'DEPOSIT')
+        .reduce((sum, t) => sum + t.amount, 0);
 
-          // Calcola i prelievi
-          this.withdrawal = this.transactions
-            .filter((t) => t.transactionType === 'WITHDRAWAL')
-            .reduce((sum, t) => sum + t.amount, 0);
+      // Calcola i prelievi
+      this.withdrawal = currentTransactions
+        .filter((t) => t.transactionType === 'WITHDRAWAL')
+        .reduce((sum, t) => sum + t.amount, 0);
 
-          // Aggiorna i dati del grafico
-          this.config.data.datasets[0].data = [
-            this.payment,
-            this.deposit,
-            this.withdrawal,
-          ];
+      // Calcola i bonifici
+      this.transfer = currentTransactions
+      .filter((t) => t.transactionType === 'TRANSFER')
+      .reduce((sum, t) => sum + t.amount, 0);
 
-          if (this.chart) {
-            this.chart.destroy();
-          }
+      // Aggiorna i dati del grafico
+      this.config.data.datasets[0].data = [
+        this.payment,
+        this.deposit,
+        this.withdrawal,
+        this.transfer
+      ];
 
-          // Crea il grafico DOPO aver aggiornato i dati
-          this.chart = new Chart('MyChart', this.config);
-        },
-      });
+      if (this.chart) {
+        this.chart.destroy();
+      }
+
+      // Crea il grafico DOPO aver aggiornato i dati
+      this.chart = new Chart('MyChart', this.config);
     });
   }
 }

@@ -8,21 +8,47 @@
 .child {
   flex: 1;
   background: linear-gradient(90deg, var(--primary-dark) 70%, var(--accent-dark) 100%);
-  padding: 12px 20px;
+  padding: 16px 20px;
   border-radius: 8px;
   cursor: pointer;
   color: white;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
   transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
 }
 
 .child:hover {
   background: linear-gradient(90deg, var(--accent-dark) 60%, var(--primary-dark) 100%);
   transform: translateY(-2px) scale(1.01);
+}
+
+.account-info, .iban-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-label, .iban-label {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.account-number {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.iban-number {
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.8;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
 }
 
 span {

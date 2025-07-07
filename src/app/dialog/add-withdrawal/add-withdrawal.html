@@ -1,6 +1,6 @@
 <form [formGroup]="myForm" (ngSubmit)="createWithdrawal()">
   <div class="wrapper-title" (click)="closeDialog()">
-    <h2>Effettua un prelievo</h2>
+    <h2>Simulazione di prelievo</h2>
     <mat-icon>close</mat-icon>
   </div>
   <mat-form-field appearance="outline">
@@ -36,7 +36,7 @@
     matButton="filled"
     type="submit"
     [disabled]="myForm.invalid"
-  >Preleva
+  >Simula prelievo
 </button>
   <div class="response">{{response()}}</div>
 </form>

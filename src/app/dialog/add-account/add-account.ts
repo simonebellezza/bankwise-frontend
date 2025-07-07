@@ -13,6 +13,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AccountService } from '../../services/account.service';
 import { AccountRequestDTO, Currency } from '../../models/account.model';
 import { MatIcon } from '@angular/material/icon';
+import { DashboardStateService } from '../../services/dashboardState.service';
 
 @Component({
   selector: 'app-add-account',
@@ -29,6 +30,7 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './add-account.css',
 })
 export class AddAccount {
+  dashboardService = inject(DashboardStateService);
   accountService = inject(AccountService);
   private dialogRef = inject(MatDialogRef<AddAccount>);
   response = signal("");
@@ -46,8 +48,10 @@ export class AddAccount {
       };
 
       this.accountService.createAccount(account).subscribe({
-        next: () => {
+        next: (account) => {
           this.response.set("Conto attivato regolarmente!");
+          this.dashboardService.loadAccounts();
+          this.dashboardService.selectAccount(account);
         },
         error: (error) => {
           this.response.set(error.error);

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal, computed } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { UserResponse } from '../models/user.model';
-import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

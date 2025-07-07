@@ -1,20 +1,16 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable, signal, computed, inject } from "@angular/core";
-import { AccountRequestDTO, AccountResponse } from "../models/account.model";
-import { tap } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { AccountRequestDTO, AccountResponse } from '../models/account.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
   httpClient = inject(HttpClient);
   url = 'http://localhost:8080/account/';
 
-  private account = signal<AccountResponse>({} as AccountResponse);
-  accountSelected = this.account.asReadonly();
-
-  createAccount (account: AccountRequestDTO) {
-    return this.httpClient.post<AccountResponse>(this.url + "create", account); 
+  createAccount(account: AccountRequestDTO) {
+    return this.httpClient.post<AccountResponse>(this.url + 'create', account);
   }
 
   getAccounts() {
@@ -22,9 +18,6 @@ export class AccountService {
   }
 
   getAccountById(id: number) {
-    return this.httpClient.get<AccountResponse>(this.url + id).subscribe({
-      next: (acc) => this.account.set(acc)
-    });
+    return this.httpClient.get<AccountResponse>(this.url + id);
   }
-
 }

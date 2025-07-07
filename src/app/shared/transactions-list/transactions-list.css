@@ -35,3 +35,8 @@ mat-list-item:hover {
 .green {
   color: #007206;
 }
+
+.empty {
+  color: var(--warn);
+  text-align: center;
+}

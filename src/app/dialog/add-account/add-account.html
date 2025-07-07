@@ -1,6 +1,6 @@
 <form [formGroup]="myForm" (ngSubmit)="createAccount()">
   <div class="wrapper-title" (click)="closeDialog()">
-    <h2>Nuovo Conto Corrente</h2>
+    <h2>Apertura nuovo conto</h2>
     <mat-icon>close</mat-icon>
   </div>
   <mat-form-field appearance="outline">
@@ -25,10 +25,9 @@
   <button
     matButton="filled"
     [disabled]="myForm.invalid"
-    (click)="createAccount()"
     type="submit"
   >
-    Crea Account
+    Apri conto
   </button>
   <div class="response">{{response()}}</div>
 </form>

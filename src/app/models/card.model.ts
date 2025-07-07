@@ -1,7 +1,6 @@
 export interface CardResponse {
     id: number,
     cardNumber: string,
-    iban: string,
     cardType: cardType,
     circuit: string,
     expirationDate: string,
@@ -13,6 +12,13 @@ export interface CardRequestDTO {
     cardType: cardType,
     circuit: Circuit,
     accountId: number
+}
+
+export interface TransactionRequestByCardDTO {
+    amount: number;
+    description:string;
+    cardId: number;
+    pin:string;
 }
 
 export enum cardType {

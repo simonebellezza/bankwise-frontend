@@ -16,6 +16,7 @@ import { TransactionRequestDTO } from '../../models/transaction.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SidenavQuickActions } from '../../shared/sidenav-quick-actions/sidenav-quick-actions';
 import { MatIcon } from '@angular/material/icon';
+import { DashboardStateService } from '../../services/dashboardState.service';
 
 @Component({
   selector: 'app-add-withdrawal',
@@ -25,39 +26,24 @@ import { MatIcon } from '@angular/material/icon';
     MatSelectModule,
     MatButton,
     MatInput,
-    MatIcon
+    MatIcon,
   ],
   templateUrl: './add-withdrawal.html',
   styleUrl: './add-withdrawal.css',
 })
-export class AddWithdrawal implements OnInit {
-  accountService = inject(AccountService);
+export class AddWithdrawal {
+  dashboardService = inject(DashboardStateService);
   transactionService = inject(TransactionService);
   private dialogRef = inject(MatDialogRef<SidenavQuickActions>);
 
-  accounts = signal<AccountResponse[]>([]);
+  accounts = this.dashboardService.accounts$;
   response = signal('');
 
   myForm = new FormGroup({
-    amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
+    amount: new FormControl(null, [Validators.required, Validators.min(0.01)]),
     description: new FormControl('', [Validators.required]),
-    accountId: new FormControl('', [Validators.required]),
+    accountId: new FormControl(0, [Validators.required]),
   });
-
-  ngOnInit() {
-    this.loadAccounts();
-  }
-
-  loadAccounts() {
-    this.accountService.getAccounts().subscribe({
-      next: (accounts: AccountResponse[]) => {
-        this.accounts.set(accounts);
-      },
-      error: (error: any) => {
-        console.error('Error loading accounts:', error);
-      }
-    });
-  }
 
   createWithdrawal() {
     const depositBody: TransactionRequestDTO = {
@@ -68,21 +54,18 @@ export class AddWithdrawal implements OnInit {
     const accountId = this.myForm.value.accountId!;
 
     this.transactionService
-      .withdraw(depositBody, accountId)
+      .withdraw(depositBody, accountId.toString())
       .subscribe({
         next: () => {
           this.response.set('Prelievo effettuato con successo!');
+          this.dashboardService.loadTransactions(accountId);
+          this.dashboardService.loadAccount(accountId);
         },
-        error: (error) => {
-          this.response.set(error.error);
-          setTimeout(() => {
-            this.dialogRef.close();
-          }, 1000)
-        },
+        error: (error) => this.response.set(error.error.message),
       });
   }
 
   closeDialog() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

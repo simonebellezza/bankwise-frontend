@@ -1,9 +1,16 @@
-.register {
+:host {
+  background-color: var(--background);
+  display: block;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--background);
+}
+
+.wrapper {
   min-height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--background);
 }
 
 mat-card {
@@ -39,16 +46,15 @@ mat-form-field {
   justify-content: center;
 }
 
-button {
-  min-width: 50%;
-  padding: 30px;
-}
-
 .error {
   margin-bottom: 10px;
   height: 20px;
   text-align: center;
-  color: var(--warn);
+}
+
+mat-card-actions {
+  flex-direction: column;
+  gap: 10px;
 }
 
 @media (max-width: 600px) {

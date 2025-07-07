@@ -1,24 +1,23 @@
-
 <div
   class="card"
-  [class.gold]="cardSelected().circuit === 'AMERICAN_EXPRESS'"
-  [class.visa]="cardSelected().circuit === 'VISA'"
-  [class.mastercard]="cardSelected().circuit === 'MASTERCARD'"
+  [class.gold]="cardSelected()?.circuit === 'AMERICAN_EXPRESS'"
+  [class.visa]="cardSelected()?.circuit === 'VISA'"
+  [class.mastercard]="cardSelected()?.circuit === 'MASTERCARD'"
 >
   <div class="header">
-    <span>{{cardSelected().cardType}}</span>
+    <span>{{cardSelected()?.cardType}}</span>
     <mat-icon>wifi</mat-icon>
   </div>
   <div class="content"></div>
-  <div class="iban">{{cardSelected().iban}}</div>
+  <div class="card-number">{{cardSelected()?.cardNumber}}</div>
   <div class="footer">
-    <div>{{cardSelected().expirationDate | date:'mediumDate'}}</div>
-    <div class="circuit">{{cardSelected().circuit}}</div>
+    <div>{{cardSelected()?.expirationDate | date:'mediumDate'}}</div>
+    <div class="circuit">{{cardSelected()?.circuit}}</div>
   </div>
 </div>
 
 <div class="switch">
   @for (card of cards(); track card.id) {
-    <button matButton (click)="selectCard(card)">{{card.cardType}}</button>
+  <button matButton (click)="selectCard(card)">{{card.cardType}}</button>
   }
 </div>

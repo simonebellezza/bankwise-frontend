@@ -15,7 +15,7 @@ export interface TransactionRequestDTO {
 export interface TransferRequestDTO {
   amount: number;
   description: string;
-  fromAccountId: number;
+  senderAccountId: number;
   receiverIban: string;
 }
 

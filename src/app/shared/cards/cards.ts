@@ -1,10 +1,10 @@
-import { Component, effect, inject, signal } from '@angular/core';
-import { CardsService } from '../../services/cards.service';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { CardResponse } from '../../models/card.model';
 import { DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { AccountService } from '../../services/account.service';
 import { MatButtonModule } from '@angular/material/button';
+import { DashboardStateService } from '../../services/dashboardState.service';
 
 @Component({
   selector: 'app-cards',
@@ -13,29 +13,20 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './cards.css',
 })
 export class Cards{
-  private cardsService = inject(CardsService);
-  accountService = inject(AccountService);
-  
-  cards = signal<CardResponse[]>([]);
-  cardSelected = signal<CardResponse>({} as CardResponse);
-  account = this.accountService.accountSelected;
+  dashboardService = inject(DashboardStateService)
+  cards = this.dashboardService.cards$;
+  cardSelected = signal<CardResponse | null>(null);
 
   constructor() {
-    effect(() => {
-      const current = this.account();
-      if (current && current.id) {
-        this.cardsService.getCards(current.id).subscribe({
-          next: (cards) => {
-            this.cards.set(cards);
-            if(cards.length > 0){
-              this.cardSelected.set(cards[0])
-            }
-          },
-          error: (error) => console.error(error),
-        });
-      }
-    });
-  }
+  effect(() => {
+    const newCards = this.cards();
+    if (newCards.length > 0) {
+      this.cardSelected.set(newCards[0]);
+    } else {
+      this.cardSelected.set(null);
+    }
+  });
+}
 
   selectCard(card: CardResponse){
     this.cardSelected.set(card);

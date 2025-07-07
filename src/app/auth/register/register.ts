@@ -34,7 +34,6 @@ import { Router } from '@angular/router';
   styleUrl: './register.css',
 })
 export class Register {
-
   authService = inject(AuthService);
   router = inject(Router);
 
@@ -72,17 +71,23 @@ export class Register {
 
     this.authService.register(user).subscribe({
       next: (resp) => {
-        console.log(resp);
+        this.errorMessage.set(resp);
         this.registerForm.reset();
-        this.router.navigate(['/login']);
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2500);
       },
       error: (error) => {
-        this.errorMessage.set(error.error)
-        
+        this.errorMessage.set(error.error);
+
         setTimeout(() => {
           this.errorMessage.set('');
         }, 3000);
-      }
-    })
+      },
+    });
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
   }
 }

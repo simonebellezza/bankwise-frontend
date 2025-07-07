@@ -4,6 +4,7 @@ import { AccountResponse } from '../../models/account.model';
 import { MatIcon } from '@angular/material/icon';
 import { AddAccount } from '../../dialog/add-account/add-account';
 import { MatDialog } from '@angular/material/dialog';
+import { DashboardStateService } from '../../services/dashboardState.service';
 
 @Component({
   selector: 'app-select-account',
@@ -11,34 +12,25 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './select-account.html',
   styleUrl: './select-account.css',
 })
-export class SelectAccount implements OnInit {
-  accountService = inject(AccountService);
-  dialog = inject(MatDialog);
-  accounts = signal<AccountResponse[]>([]);
+export class SelectAccount {
+  private dialog = inject(MatDialog);
+  private dashboardService = inject(DashboardStateService);
 
-  ngOnInit(): void {
-    this.getAccounts();
-  }
+  accounts = this.dashboardService.accounts$;
+  selected = this.dashboardService.accountSelected;
 
-  getAccounts() {
-    this.accountService.getAccounts().subscribe({
-      next: (accounts) => this.accounts.set(accounts),
-      error: (error) => console.log(error),
-    });
-  }
-
-  onSelectAccount(accountId: number) {
-    this.accountService.getAccountById(accountId);
+  onSelectAccount(account: AccountResponse) {
+    this.dashboardService.selectAccount(account);
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddAccount);
 
     dialogRef.afterClosed().subscribe({
-      next: (result) => {
-        if (result) {
-          console.log('Account creato:', result);
-          this.getAccounts();
+      next: (newAccount) => {
+        if (newAccount) {
+          console.log('Nuovo account creato:', newAccount);
+          this.dashboardService.initDashboard(); // Ricarica lo stato
         }
       },
     });

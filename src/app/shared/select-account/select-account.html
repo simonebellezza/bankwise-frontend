@@ -1,7 +1,14 @@
 <div class="select-account-section">
   @for (account of accounts(); track account.id) {
-    <div class="child" (click)="onSelectAccount(account.id)">
-      <span>Conto:</span><span>{{account.accountNumber}}</span>
+    <div class="child" (click)="onSelectAccount(account)">
+      <div class="account-info">
+        <span class="account-label">Conto:</span>
+        <span class="account-number">{{account.accountNumber}}</span>
+      </div>
+      <div class="iban-info">
+        <span class="iban-label">IBAN:</span>
+        <span class="iban-number">{{account.iban}}</span>
+      </div>
     </div>
   }
   

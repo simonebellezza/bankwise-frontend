@@ -1,6 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { AccountResponse } from '../../models/account.model';
-import { AccountService } from '../../services/account.service';
 import { CurrencyPipe } from '@angular/common';
 import { TransactionsChart } from '../../shared/transactions-chart/transactions-chart';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +6,7 @@ import { Cards } from '../../shared/cards/cards';
 import { MatIcon } from '@angular/material/icon';
 import { SelectAccount } from '../../shared/select-account/select-account';
 import { TransactionsList } from '../../shared/transactions-list/transactions-list';
+import { DashboardStateService } from '../../services/dashboardState.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,24 +22,20 @@ import { TransactionsList } from '../../shared/transactions-list/transactions-li
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard implements OnInit {
-  private accountService = inject(AccountService);
-  account = this.accountService.accountSelected;
 
-  accounts = signal<AccountResponse[]>([]);
+export class Dashboard implements OnInit {
+  dashboardService = inject(DashboardStateService);
   showBalance = signal<boolean>(true);
 
+  accounts = this.dashboardService.accounts$;
+  account = this.dashboardService.accountSelected;
+  transactions = this.dashboardService.transactions$;
+  cards = this.dashboardService.cards$;
+
   ngOnInit() {
-    this.getAccounts();
-    this.accountService.getAccountById(1);
+    this.dashboardService.initDashboard()
   }
 
-  getAccounts() {
-    this.accountService.getAccounts().subscribe({
-      next: (accounts) => this.accounts.set(accounts),
-      error: (error) => console.log(error),
-    });
-  }
 
   toggleBalance() {
     this.showBalance.set(!this.showBalance());

@@ -1,6 +1,6 @@
 <app-header />
-<div class="register">
-  <mat-card>
+<div class="wrapper">
+  <mat-card appearance="outlined">
     <mat-card-header class="header">
       <mat-card-title>Registrati</mat-card-title>
       <mat-card-subtitle>Inserisci i tuoi dati</mat-card-subtitle>
@@ -48,11 +48,14 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Data di nascita</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" />
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="dateOfBirth"
+            />
             <mat-datepicker-toggle
               matIconSuffix
               [for]="picker"
-
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -60,7 +63,7 @@
 
         <div class="error">{{errorMessage()}}</div>
 
-        <div class="actions">
+        <mat-card-actions class="actions">
           <button
             mat-flat-button
             type="submit"
@@ -69,7 +72,11 @@
             <span>Registrati</span>
             <mat-icon>login</mat-icon>
           </button>
-        </div>
+          <div class="login">
+            <span>Possiedi già un account?</span>
+            <a mat-button (click)="redirectToLogin()">Login</a>
+          </div>
+        </mat-card-actions>
       </form>
     </mat-card-content>
   </mat-card>

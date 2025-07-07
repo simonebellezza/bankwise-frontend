@@ -1,6 +1,6 @@
 <form [formGroup]="myForm" (ngSubmit)="createCard()">
   <div class="wrapper-title" (click)="closeDialog()">
-    <h2>Nuova Carta Bancaria</h2>
+    <h2>Richiesta nuova carta</h2>
     <mat-icon>close</mat-icon>
   </div>
 
@@ -26,7 +26,7 @@
     <mat-label>Conto di riferimento</mat-label>
     <mat-select formControlName="accountId">
       @for (account of accounts(); track account.id) {
-      <mat-option value="{{account.id}}">{{account.id}}</mat-option>
+      <mat-option value="{{account.id}}">{{account.accountNumber}}</mat-option>
       }
     </mat-select>
   </mat-form-field>
@@ -36,7 +36,7 @@
     [disabled]="myForm.invalid"
     type="submit"
   >
-    Crea Carta
+    Richiedi carta
   </button>
   <div class="response">{{response()}}</div>
 </form>

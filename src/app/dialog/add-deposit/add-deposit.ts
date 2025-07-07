@@ -16,6 +16,7 @@ import { TransactionRequestDTO } from '../../models/transaction.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SidenavQuickActions } from '../../shared/sidenav-quick-actions/sidenav-quick-actions';
 import { MatIcon } from '@angular/material/icon';
+import { DashboardStateService } from '../../services/dashboardState.service';
 
 @Component({
   selector: 'app-add-deposit',
@@ -30,27 +31,21 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './add-deposit.html',
   styleUrl: './add-deposit.css',
 })
-export class AddDeposit implements OnInit {
-  accountService = inject(AccountService);
+export class AddDeposit {
+  dashboardService = inject(DashboardStateService);
   transactionService = inject(TransactionService);
   private dialogRef = inject(MatDialogRef<SidenavQuickActions>);
 
-  accounts = signal<AccountResponse[]>([]);
+  accounts = this.dashboardService.accounts$;
   response = signal('');
 
   myForm = new FormGroup({
-    amount: new FormControl(0, [Validators.required, Validators.min(0)]),
+    amount: new FormControl(null, [Validators.required, Validators.min(0.01)]),
     description: new FormControl('', [Validators.required]),
-    accountId: new FormControl('', [Validators.required]),
+    accountId: new FormControl(0 , [Validators.required]),
   });
 
-  ngOnInit(): void {
-    this.accountService.getAccounts().subscribe({
-      next: (accounts) => this.accounts.set(accounts),
-      error: (error) => console.log(error),
-    });
-  }
-
+ 
   createDeposit() {
     const depositBody: TransactionRequestDTO = {
       amount: this.myForm.value.amount!,
@@ -62,7 +57,9 @@ export class AddDeposit implements OnInit {
     this.transactionService
       .deposit(depositBody, accountId.toString())
       .subscribe({
-        next: (response) => {
+        next: () => {
+          this.dashboardService.loadTransactions(accountId);
+          this.dashboardService.loadAccount(accountId);
           this.response.set('Deposito effettuato con successo!');
         },
         error: (error) => {
