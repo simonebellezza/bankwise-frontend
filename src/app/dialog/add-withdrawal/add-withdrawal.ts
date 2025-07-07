@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,9 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { TransactionService } from '../../services/transaction.service';
-import { AccountService } from '../../services/account.service';
-import { AccountResponse } from '../../models/account.model';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
@@ -17,6 +14,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { SidenavQuickActions } from '../../shared/sidenav-quick-actions/sidenav-quick-actions';
 import { MatIcon } from '@angular/material/icon';
 import { DashboardStateService } from '../../services/dashboardState.service';
+import { CardsService } from '../../services/cards.service';
+import { TransactionRequestByCardDTO } from '../../models/card.model';
 
 @Component({
   selector: 'app-add-withdrawal',
@@ -33,36 +32,34 @@ import { DashboardStateService } from '../../services/dashboardState.service';
 })
 export class AddWithdrawal {
   dashboardService = inject(DashboardStateService);
-  transactionService = inject(TransactionService);
-  private dialogRef = inject(MatDialogRef<SidenavQuickActions>);
-
-  accounts = this.dashboardService.accounts$;
-  response = signal('');
-
-  myForm = new FormGroup({
-    amount: new FormControl(null, [Validators.required, Validators.min(0.01)]),
-    description: new FormControl('', [Validators.required]),
-    accountId: new FormControl(0, [Validators.required]),
-  });
+      cardService = inject(CardsService);
+      private dialogRef = inject(MatDialogRef<SidenavQuickActions>);
+    
+      cards = this.dashboardService.cards$;
+      response = signal('');
+    
+      myForm = new FormGroup({
+        amount: new FormControl(null, [Validators.required, Validators.min(0.01)]),
+        description: new FormControl('', [Validators.required]),
+        cardId: new FormControl(0, [Validators.required]),
+        pin: new FormControl('', [Validators.required]),
+      });
 
   createWithdrawal() {
-    const depositBody: TransactionRequestDTO = {
-      amount: this.myForm.value.amount!,
-      description: this.myForm.value.description!,
-    };
-
-    const accountId = this.myForm.value.accountId!;
-
-    this.transactionService
-      .withdraw(depositBody, accountId.toString())
-      .subscribe({
-        next: () => {
-          this.response.set('Prelievo effettuato con successo!');
-          this.dashboardService.loadTransactions(accountId);
-          this.dashboardService.loadAccount(accountId);
-        },
-        error: (error) => this.response.set(error.error.message),
-      });
+    const withdrawal: TransactionRequestByCardDTO = {
+              amount: this.myForm.value.amount!,
+              description: this.myForm.value.description!,
+              cardId: this.myForm.value.cardId!,
+              pin: this.myForm.value.pin!,
+            };
+    
+         this.cardService.withdrawByCard(withdrawal).subscribe({
+          next: () => {
+            this.response.set('Prelievo effettuato correttamente');
+            this.dashboardService.initDashboard();
+          },
+          error: (error) => this.response.set(error.error.message),
+        });
   }
 
   closeDialog() {

@@ -15,28 +15,34 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Descrizione</mat-label>
-    <textarea 
-      matInput 
+    <textarea
+      matInput
       formControlName="description"
-      placeholder="Inserisci una descrizione del prelievo..."
-      rows="3">
+      placeholder="Inserisci una descrizione..."
+      rows="3"
+    >
     </textarea>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
-    <mat-label>Conto di riferimento</mat-label>
-    <mat-select formControlName="accountId">
-      @for (account of accounts(); track account.id) {
-      <mat-option value="{{account.id}}">{{account.id}}</mat-option>
+    <mat-label>Numero di carta</mat-label>
+    <mat-select formControlName="cardId">
+      @for (card of cards(); track card.id) {
+      <mat-option value="{{card.id}}">{{card.cardNumber}}</mat-option>
       }
     </mat-select>
   </mat-form-field>
 
-  <button
-    matButton="filled"
-    type="submit"
-    [disabled]="myForm.invalid"
-  >Simula prelievo
-</button>
+  <mat-form-field appearance="outline">
+    <mat-label>Pin</mat-label>
+    <input
+      matInput
+      type="text"
+      formControlName="pin"
+      placeholder="21445"
+    />
+  </mat-form-field>
+
+  <button matButton="filled" [disabled]="myForm.invalid">Simula un prelievo</button>
   <div class="response">{{response()}}</div>
 </form>
