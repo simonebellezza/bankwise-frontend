@@ -18,10 +18,6 @@ export class CardsService {
     return this.httpClient.get<CardResponse[]>(this.url + id);
   }
 
-  getAllCards() {
-    return this.httpClient.get<CardResponse[]>(this.url + 'cards');
-  }
-
   addCard(card: CardRequestDTO) {
     return this.httpClient.post<CardResponse>(this.url + 'create', card);
   }

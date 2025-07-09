@@ -57,8 +57,7 @@ export class AddTransfer {
     this.transactionService.transfer(transfer).subscribe({
       next: () => {
         this.response.set('Bonifico effettuato!');
-        this.dashboardService.loadTransactions(transfer.senderAccountId);
-        this.dashboardService.loadAccount(transfer.senderAccountId);
+        this.dashboardService.initDashboard();
       },
       error: (error) => this.response.set(error.error.message),
     });

@@ -50,7 +50,7 @@ export class AddAccount {
       this.accountService.createAccount(account).subscribe({
         next: (account) => {
           this.response.set("Conto attivato regolarmente!");
-          this.dashboardService.loadAccounts();
+          this.dashboardService.initDashboard();
           this.dashboardService.selectAccount(account);
         },
         error: (error) => {

@@ -46,7 +46,7 @@ export class AddCard {
     this.cardService.addCard(cardData).subscribe({
       next: (card) => {
         this.response.set('Carta bancaria attivata! Conserva il pin in un luogo sicuro: ' + card.pin);
-        this.dashboardService.loadCards(cardData.accountId);
+        this.dashboardService.initDashboard();
       },
       error: (error) => {
         this.response.set(error.error.message);

@@ -48,12 +48,6 @@ export class DashboardStateService {
     this.selectedAccount.set(account);
   }
 
-  loadAccount(accountId: number) {
-    this.accountsService.getAccountById(accountId).subscribe((account) => {
-      this.selectedAccount.set(account);
-    })
-  }
-
   loadCards(accountId: number) {
     this.cardsService.getCards(accountId).subscribe((cards) => {
       this.cards.set(cards);
@@ -63,12 +57,6 @@ export class DashboardStateService {
   loadTransactions(accountId: number) {
     this.transactionService.getTransactions(accountId).subscribe((tx) => {
       this.transactions.set(tx);
-    });
-  }
-
-  loadAccounts() {
-    this.accountsService.getAccounts().subscribe((accounts) => {
-      this.accounts.set(accounts);
     });
   }
 }
