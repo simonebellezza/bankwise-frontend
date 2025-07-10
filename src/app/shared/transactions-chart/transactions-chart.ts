@@ -52,27 +52,22 @@ export class TransactionsChart {
         return;
       }
 
-      // Calcola i pagamenti
       this.payment = currentTransactions
         .filter((t) => t.transactionType === 'PAYMENT')
         .reduce((sum, t) => sum + t.amount, 0);
 
-      // Calcola i depositi
       this.deposit = currentTransactions
         .filter((t) => t.transactionType === 'DEPOSIT')
         .reduce((sum, t) => sum + t.amount, 0);
 
-      // Calcola i prelievi
       this.withdrawal = currentTransactions
         .filter((t) => t.transactionType === 'WITHDRAWAL')
         .reduce((sum, t) => sum + t.amount, 0);
 
-      // Calcola i bonifici
       this.transfer = currentTransactions
       .filter((t) => t.transactionType === 'TRANSFER')
       .reduce((sum, t) => sum + t.amount, 0);
 
-      // Aggiorna i dati del grafico
       this.config.data.datasets[0].data = [
         this.payment,
         this.deposit,
@@ -84,7 +79,6 @@ export class TransactionsChart {
         this.chart.destroy();
       }
 
-      // Crea il grafico DOPO aver aggiornato i dati
       this.chart = new Chart('MyChart', this.config);
     });
   }

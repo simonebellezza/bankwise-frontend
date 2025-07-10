@@ -9,9 +9,9 @@ import { Transactions } from './pages/transactions/transactions';
 import { Profile } from './pages/profile/profile';
 
 export const routes: Routes = [
-  { path: 'register', component: Register, canActivate: [LoginGuard] }, // Register
-  { path: 'login', component: Login, canActivate: [LoginGuard] }, // Login
-  { path: '', component: Home, canActivate: [AuthGuard], children: [ // Home + Children
+  { path: 'register', component: Register, canActivate: [LoginGuard] },
+  { path: 'login', component: Login, canActivate: [LoginGuard] },
+  { path: '', component: Home, canActivate: [AuthGuard], children: [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path: 'dashboard', component: Dashboard, canActivate: [AuthGuard] },
     { path: 'transactions', component: Transactions, canActivate: [AuthGuard]},

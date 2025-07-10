@@ -29,8 +29,7 @@ export class SelectAccount {
     dialogRef.afterClosed().subscribe({
       next: (newAccount) => {
         if (newAccount) {
-          console.log('Nuovo account creato:', newAccount);
-          this.dashboardService.initDashboard(); // Ricarica lo stato
+          this.dashboardService.initDashboard();
         }
       },
     });
