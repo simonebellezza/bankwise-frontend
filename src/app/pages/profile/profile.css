@@ -4,3 +4,37 @@
   background-color: var(--background);
   padding: 20px;
 }
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+mat-card-header {
+  height: 70px;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, var(--accent), var(--primary));
+  color: white;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+mat-card-title {
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.card-active {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.card-inactive {
+  color: #f44336;
+  font-weight: 600;
+}

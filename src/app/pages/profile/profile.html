@@ -1,1 +1,96 @@
-<p>Profile</p>
+<div class="profile-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-icon>person</mat-icon>
+      <mat-card-title>Area Personale</mat-card-title>
+    </mat-card-header>
+    <mat-list>
+      @if (user()) {
+        <mat-list-item>
+          <mat-icon matListItemIcon>badge</mat-icon>
+          <div matListItemTitle>Nome: {{user()?.firstName}} {{user()?.lastName}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>email</mat-icon>
+          <div matListItemTitle>Email: {{user()?.email}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>phone</mat-icon>
+          <div matListItemTitle>Numero telefonico: {{user()?.phoneNumber}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>home</mat-icon>
+          <div matListItemTitle>Indirizzo: {{user()?.address}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>cake</mat-icon>
+          <div matListItemTitle>Data di nascita: {{user()?.dateOfBirth | date: "fullDate" }}</div>
+        </mat-list-item>
+      } @else {
+        <mat-list-item>
+          <mat-icon matListItemIcon>info</mat-icon>
+          <div matListItemTitle>Caricamento dati utente...</div>
+        </mat-list-item>
+      }
+    </mat-list>
+  </mat-card>
+  
+  <mat-card>
+    <mat-card-header>
+      <mat-icon>account_balance</mat-icon>
+      <mat-card-title>I Tuoi Conti</mat-card-title>
+    </mat-card-header>
+    <mat-list>
+      @for (account of accounts(); track account.id) {
+        <mat-list-item>
+          <mat-icon matListItemIcon>account_balance_wallet</mat-icon>
+          <div matListItemTitle>{{account.accountNumber}}</div>
+          <div matListItemLine>IBAN: {{account.iban}}</div>
+          <div matListItemLine>Saldo: {{account.balance | currency:account.currency}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      } @empty {
+        <mat-list-item>
+          <mat-icon matListItemIcon>info</mat-icon>
+          <div matListItemTitle>Nessun conto disponibile</div>
+        </mat-list-item>
+      }
+    </mat-list>
+  </mat-card>
+  
+  <mat-card>
+    <mat-card-header>
+      <mat-icon>credit_card</mat-icon>
+      <mat-card-title>Le Tue Carte</mat-card-title>
+    </mat-card-header>
+    <mat-list>
+      @for (card of cards(); track card.id) {
+        <mat-list-item>
+          <mat-icon matListItemIcon>payment</mat-icon>
+          <div matListItemTitle>{{card.cardType}} - {{card.circuit}}</div>
+          <div matListItemLine>**** **** **** {{card.cardNumber.slice(-4)}}</div>
+          <div matListItemLine>Scadenza: {{card.expirationDate | date:'MM/yy'}}</div>
+          <div matListItemLine>
+            <span [class]="card.active ? 'card-active' : 'card-inactive'">
+              {{card.active ? 'Attiva' : 'Non Attiva'}}
+            </span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      } @empty {
+        <mat-list-item>
+          <mat-icon matListItemIcon>info</mat-icon>
+          <div matListItemTitle>Nessuna carta disponibile</div>
+        </mat-list-item>
+      }
+    </mat-list>
+  </mat-card>
+</div>

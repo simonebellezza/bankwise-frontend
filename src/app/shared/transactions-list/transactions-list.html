@@ -24,6 +24,9 @@
       </mat-list-item>
     } 
   } @else {
-  <p class="empty">Non ci sono movimenti</p>
-    }
+    <mat-list-item>
+      <mat-icon matListItemIcon>info</mat-icon>
+      <div matListItemTitle>Nessun movimento disponibile</div>
+    </mat-list-item>
+  }
 </mat-list>

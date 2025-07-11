@@ -5,12 +5,15 @@ import { TransactionResponseDTO } from '../models/transaction.model';
 import { AccountService } from './account.service';
 import { CardsService } from './cards.service';
 import { TransactionService } from './transaction.service';
+import { UserService } from './user.service';
+import { UserResponse } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardStateService {
   private accountsService = inject(AccountService);
   private cardsService = inject(CardsService);
   private transactionService = inject(TransactionService);
+  private userService = inject(UserService);
 
   private selectedAccount = signal<AccountResponse | null>(null);
   readonly accountSelected = this.selectedAccount.asReadonly();
@@ -24,6 +27,9 @@ export class DashboardStateService {
   private accounts = signal<AccountResponse[]>([]);
   readonly accounts$ = this.accounts.asReadonly();
 
+  private user = signal<UserResponse | null>(null);
+  readonly user$ = this.user.asReadonly();
+
   constructor() {
     effect(() => {
       const account = this.selectedAccount();
@@ -32,7 +38,7 @@ export class DashboardStateService {
         this.loadTransactions(account.id);
       }
     });
-
+    this.loadUser();
   }
 
   initDashboard() {
@@ -58,5 +64,11 @@ export class DashboardStateService {
     this.transactionService.getTransactions(accountId).subscribe((tx) => {
       this.transactions.set(tx);
     });
+  }
+
+  loadUser() {
+    this.userService.getUser().subscribe((user) => {
+      this.user.set(user);
+    })
   }
 }

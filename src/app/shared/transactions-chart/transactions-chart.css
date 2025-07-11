@@ -7,6 +7,27 @@
   padding: 10px;
 }
 
-.empty {
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   color: var(--warn);
+  text-align: center;
+}
+
+.empty-state mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  opacity: 0.8;
+}
+
+.empty-state p {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.hidden {
+  max-width: 0;
 }

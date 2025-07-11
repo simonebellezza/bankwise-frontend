@@ -1,6 +1,12 @@
 <div class="chart-container">
-  <canvas id="MyChart">{{chart}}</canvas>
+  <canvas 
+    id="MyChart" 
+    [class.hidden]="transactions().length === 0"
+  >{{chart}}</canvas>
   @if (transactions().length === 0) {
-    <p class="empty">Non ci sono movimenti</p>
+    <div class="empty-state">
+      <mat-icon>info</mat-icon>
+      <p>Nessun movimento disponibile per il grafico</p>
+    </div>
   }
 </div>

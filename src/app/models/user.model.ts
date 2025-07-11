@@ -8,6 +8,7 @@ export interface UserResponse {
   email: string;
   phoneNumber: string;
   address: string;
+  dateOfBirth: string;
   accounts: AccountResponse[];
 }
 

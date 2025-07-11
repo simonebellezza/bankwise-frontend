@@ -1,14 +1,12 @@
 import { Component, effect, inject } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { TransactionService } from '../../services/transaction.service';
-import { TransactionResponseDTO } from '../../models/transaction.model';
-import { AccountService } from '../../services/account.service';
 import { DashboardStateService } from '../../services/dashboardState.service';
+import { MatIcon } from '@angular/material/icon';
 
 Chart.register(...registerables);
 @Component({
   selector: 'app-transactions-chart',
-  imports: [],
+  imports: [MatIcon],
   templateUrl: './transactions-chart.html',
   styleUrl: './transactions-chart.css',
 })
